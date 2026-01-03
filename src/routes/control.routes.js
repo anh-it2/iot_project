@@ -1,41 +1,38 @@
 const express = require("express");
-const { ruleBasedControl } = require("../controller/ruleController");
+const { g36Control } = require("../controller/g36Controller");
 
 const router = express.Router();
 
 router.post("/control", (req, res) => {
   const {
-    tempIndoor,
-    tempOutdoor,
-    humidity,
-    userSetTemp,
+    T_room,
+    RH_room,
+    T_outdoor,
+    userTempSet,
+    userRHSet,
   } = req.body;
 
   if (
-    tempIndoor == null ||
-    tempOutdoor == null ||
-    humidity == null
+    T_room == null ||
+    RH_room == null ||
+    T_outdoor == null
   ) {
     return res.status(400).json({
       message:
-        "tempIndoor, tempOutdoor and humidity are required",
+        "T_room, RH_room, T_outdoor are required",
     });
   }
 
-  const result = ruleBasedControl({
-    tempIndoor,
-    tempOutdoor,
-    humidity,
-    userSetTemp,
+  const result = g36Control({
+    T_room,
+    RH_room,
+    T_outdoor,
+    userTempSet,
+    userRHSet,
   });
 
-  return res.json({
-    input: {
-      tempIndoor,
-      tempOutdoor,
-      humidity,
-      userSetTemp,
-    },
+  res.json({
+    input: req.body,
     output: result,
   });
 });
