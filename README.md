@@ -7,8 +7,9 @@ B3: endpoint: http://localhost:3000/api/control
 ### Sample input
 ```json
 {
-  "tempIndoor": 30,
-  "tempOutdoor": 36,
-  "humidity": 50,
-  "userSetTemp": 25
+  "T_room": 26,
+  "T_outdoor": 30,
+  "RH_room": 63.42,
+  "userTempSet": 33,
+  "userRHSet": 66
 }

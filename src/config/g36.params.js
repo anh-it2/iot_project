@@ -8,7 +8,7 @@ module.exports = {
 
   outdoor: {
     ECONOMIZER_MAX: 26,       // °C (free cooling)
-    HEAT_ENABLE: 18,
+    HEAT_ENABLE: 35,
   },
 
   humidity: {

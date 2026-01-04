@@ -49,15 +49,20 @@ function g36Control({
   }
 
   // ===== 4. HEATING =====
-  if (
-    T_room < T_heat &&
-    T_outdoor < params.outdoor.HEAT_ENABLE
-  ) {
-    return {
-      mode: "HEAT",
-      targetTemperature: T_heat,
-      reason: "Heating mode (G36)",
-    };
+  if (T_room < T_heat) {
+    if (T_outdoor < params.outdoor.HEAT_ENABLE) {
+      return {
+        mode: "HEAT",
+        targetTemperature: T_heat,
+        reason: "Heating mode (G36)",
+      };
+    } else {
+      return {
+        mode: "OFF",
+        targetTemperature: T_heat,
+        reason: "Outdoor temperature above heating enable setpoint (Lockout)",
+      };
+    }
   }
 
   // ===== 5. COMFORT / IDLE =====
